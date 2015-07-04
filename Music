@@ -1,0 +1,36 @@
+class Music
+{
+  AudioPlayer title;
+  AudioPlayer maze;
+  boolean loaded = false;
+  boolean titleSet = false;
+  boolean mazeSet = false;
+  
+  void load()
+  {
+    if(!loaded)
+    {
+      title = minim.loadFile("ost/Title.mp3", 2048);
+      maze = minim.loadFile("ost/Maze.mp3", 2048);
+      loaded = true;
+    }
+  }
+  void setTitleMusic()
+  {
+    if(!titleSet)
+    {
+      title.loop();
+      titleSet = true;
+    }
+  }
+  void setMazeMusic()
+  {
+    title.close();
+    if(!mazeSet)
+    {
+      maze.loop();
+      mazeSet = true;
+    }
+  }
+}
+  
