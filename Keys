@@ -1,0 +1,42 @@
+class Keys
+{
+  boolean[] keys;
+  boolean initi = false;
+  
+  void init()
+  {
+    if(!initi)
+    {
+      keys=new boolean[4];
+      keys[0]=false;
+      keys[1]=false;
+      keys[2]=false;
+      keys[3]=false;
+      initi = true;
+    }
+  }
+}
+  
+void keyPressed()
+{
+  if(keyCode==UP)
+    keyboard.keys[0]=true;
+  if(keyCode==DOWN)
+    keyboard.keys[1]=true;
+  if(keyCode==LEFT)
+    keyboard.keys[2]=true;
+  if(keyCode==RIGHT)
+    keyboard.keys[3]=true;
+}
+  
+void keyReleased()
+{
+  if(keyCode==UP)
+    keyboard.keys[0]=false;
+  if(keyCode==DOWN)
+    keyboard.keys[1]=false;
+  if(keyCode==LEFT)
+    keyboard.keys[2]=false;
+  if(keyCode==RIGHT)
+    keyboard.keys[3]=false;
+}
