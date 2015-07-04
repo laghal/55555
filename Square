@@ -1,0 +1,68 @@
+class Square
+{
+  float alpha = 0;
+  float x=0;
+  float y=0;
+  float vx=0;
+  float vy=0;
+  float size;
+  int max = 5;
+  
+  void draw()
+  {    
+    fill(245,245,245,255);     
+    translate(width/2, height/2);
+    strokeWeight(height/200);
+    stroke(20);    
+    size=height/20;
+    rect(0,0,size,size);
+  }
+  
+  void move()
+  {
+    if(keyboard.keys[0]&&vy>-max)
+      vy-=2;
+    if(keyboard.keys[1]&&vy<max)
+      vy+=2;
+    if(keyboard.keys[2]&&vx>-max)
+      vx-=2;
+    if(keyboard.keys[3]&&vx<max)
+      vx+=2;
+    if(vx*vx>0.5&&2*x<currentRoom.size-size-height/50&&2*x>-currentRoom.size+size+height/50||vx<-0.3&&2*x>=currentRoom.size-size-height/50||vx>0.3&&2*x<=-currentRoom.size+size+height/50)
+      x+=vx;      
+    if(vy*vy>0.5&&2*y<currentRoom.size-size-height/50&&2*y>-currentRoom.size+size+height/50||vy<-0.3&&2*y>=currentRoom.size-size-height/50||vy>0.3&&2*y<=-currentRoom.size+size+height/50)
+      y+=vy;
+    if(vx>0)
+      vx-=0.5;
+    else if(vx<0)
+      vx+=0.5;
+    if(vy>0)
+      vy-=0.5;
+    else if(vy<0)
+      vy+=0.5;
+    if(2*x<=-currentRoom.size+size+height/50&&y*y+size*size+height*height/500<currentRoom.doorSize*currentRoom.doorSize) //LEFT -> 0
+    {
+      getlost(0);
+      vx-=2;
+      x=-x;
+    }
+    else if(2*x>=currentRoom.size-size-height/50&&y*y+size*size+height*height/500<currentRoom.doorSize*currentRoom.doorSize) //RIGHT -> 1
+    {
+      getlost(1);
+      vx+=2;
+      x=-x;
+    }
+    else if(2*y<=-currentRoom.size+size+height/50&&x*x+size*size+height*height/500<currentRoom.doorSize*currentRoom.doorSize) //UP -> 2
+    {
+      getlost(2);
+      vy-=2;
+      y=-y;
+    }
+    else if(2*y>=currentRoom.size-size-height/50&&x*x+size*size+height*height/500<currentRoom.doorSize*currentRoom.doorSize) //DOWN -> 3
+    {
+      getlost(3);
+      vy+=2;
+      y=-y;
+    }
+  }
+}
