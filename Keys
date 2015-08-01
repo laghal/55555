@@ -1,7 +1,7 @@
 class Keys
 {
   boolean[] keys;
-  boolean initi = false;
+  boolean initi=false;
   
   void init()
   {
@@ -12,7 +12,7 @@ class Keys
       keys[1]=false;
       keys[2]=false;
       keys[3]=false;
-      initi = true;
+      initi=true;
     }
   }
 }
