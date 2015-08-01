@@ -1,14 +1,10 @@
 import ddf.minim.*;
-Minim minim;
 
 void setup()
-{  
+{    
   size(displayWidth,displayHeight+1, OPENGL);
   noCursor();
-  textAlign(CENTER, CENTER);
-  frameRate(55);  
-  hint(DISABLE_OPTIMIZED_STROKE);
-  minim = new Minim(this);
+  frameRate(55);
 }
 
 boolean sketchFullScreen()
@@ -16,23 +12,43 @@ boolean sketchFullScreen()
   return true;
 }
 
-Title titleScreen = new Title();
-Background mainBG = new Background();
-Room currentRoom = new Room();
-Square laghal = new Square();
-Keys keyboard = new Keys();
-Glitchs gl = new Glitchs();
-Music ost = new Music();
+Minim minim;
+Title titleScreen;
+Background mainBG;
+Room currentRoom;
+Square laghal;
+Keys keyboard;
+Glitchs gl;
+Music ost;
+boolean firstRun = true;
 
 void draw()
 {
-  if(!titleScreen.gameStarted)
-  {    
-    titleScreen.draw();
+  if(firstRun){
+    textAlign(CENTER, CENTER);
+    background(0,0,0);
+    textSize(height/4);
+    fill(255,255,255,255);
+    text("LOADING", width/2, height/2);
+    minim = new Minim(this);    
+    hint(DISABLE_OPTIMIZED_STROKE);    
+    titleScreen = new Title();
+    mainBG = new Background();
+    currentRoom = new Room();
+    laghal = new Square();
+    keyboard = new Keys();
+    gl = new Glitchs();
+    ost = new Music();
     ost.load();
-    ost.setTitleMusic();
     gl.init();
     keyboard.init();
+    laghal.init();
+    firstRun = false;
+  }
+  else if(!titleScreen.gameStarted)
+  {    
+    titleScreen.draw();    
+    ost.setTitleMusic();    
     titleScreen.keyPressed();
   }
   else
@@ -46,4 +62,6 @@ void draw()
     laghal.draw();
     laghal.move();
   }
+  if(keyPressed&&key=='r')
+    saveFrame("trailer/###############.tif");
 }
