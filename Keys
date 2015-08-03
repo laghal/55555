@@ -1,32 +1,44 @@
 class Keys
 {
   boolean[] keys;
-  boolean initi=false;
   
-  void init()
+  Keys()
   {
-    if(!initi)
-    {
-      keys=new boolean[4];
-      keys[0]=false;
-      keys[1]=false;
-      keys[2]=false;
-      keys[3]=false;
-      initi=true;
-    }
+    keys=new boolean[4];
+    keys[0]=false;
+    keys[1]=false;
+    keys[2]=false;
+    keys[3]=false;
   }
 }
   
 void keyPressed()
 {
-  if(keyCode==UP)
-    keyboard.keys[0]=true;
-  if(keyCode==DOWN)
-    keyboard.keys[1]=true;
-  if(keyCode==LEFT)
-    keyboard.keys[2]=true;
-  if(keyCode==RIGHT)
-    keyboard.keys[3]=true;
+  if(key==27)
+    key=0;
+  if(!pause){
+    if(keyCode==UP)
+      keyboard.keys[0]=true;
+    if(keyCode==DOWN)
+      keyboard.keys[1]=true;
+    if(keyCode==LEFT)
+      keyboard.keys[2]=true;
+    if(keyCode==RIGHT)
+      keyboard.keys[3]=true;
+    if(keyCode==ENTER&&titleScreen.gameStarted||key==' '&&titleScreen.gameStarted||key==0&&titleScreen.gameStarted)
+      menu.trigger();
+  }
+  else
+  {
+    if(keyCode==UP)
+      menu.selected--;
+    else if(keyCode==DOWN)
+      menu.selected++;
+    else if(keyCode==ENTER||key==' ')    
+      menu.execute();
+    else if(key==0)
+      menu.trigger();
+  }
 }
   
 void keyReleased()
