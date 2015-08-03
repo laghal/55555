@@ -1,18 +1,28 @@
 class Room
 {
-  float alpha = 0;
-  int region = 0;
-  int ground = 1;
-  int id = 999;
+  float alpha;
+  int region;
+  int ground;
+  int id;
   float doorSize;
-  int groundColor = 2;
+  int groundColor;
   float size;
-  boolean glitch = false;  
+  boolean glitch;  
   
+  Room()
+  {
+    alpha=0;
+    ground=1;
+    region=0;
+    id=0;
+    groundColor=2;
+    glitch = false;
+  }
+    
   void draw()
   {
-    size = (height/1.2)-(height/10)+(height/35)*cos(alpha);  
-    doorSize = size/7;
+    size = (height/1.2)-(height/10)+(height/55)*cos(alpha*2);  
+    doorSize = (titleScreen.av/256)*size/7;
     rectMode(CENTER);
     strokeWeight(height/50);
     
@@ -23,49 +33,64 @@ class Room
     }
     else
     {
-      stroke(currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))*255);
-      fill(255-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))*255);
+      stroke(region*(1-ceil(((id%5)-0.1)/5))*255);
+      fill(255-region*(1-ceil(((id%5)-0.1)/5))*255);
     }   
+    
     pushMatrix();
     translate(-laghal.x+width/2, -laghal.y+height/2);
     if(!titleScreen.gameStarted)
-    {      
+    {
+      if(titleScreen.press && titleScreen.background<255)
+      {
+        alpha-=(alpha/5)+(PI/1000);
+        if(alpha<0.05&&alpha>-0.05)
+          alpha=0;
+      }
       rotate(alpha);
     }
 
     rect(0, 0, size, size);     
-       
-    if(titleScreen.gameStarted)
+    noStroke();
+    rect(0, 0, size+height/50, doorSize*2);
+    rect(0, 0, doorSize*2, size+height/50);
+        
+    textSize(height/10);
+    if(glitch)
     {
-      noStroke();
-      rect(0, 0, size+height/50, doorSize*2);
-      rect(0, 0, doorSize*2, size+height/50);
-      textSize(height/10);
-      if(glitch)
-      {
-        strokeWeight(height/150);
-        fill(random(0,2)*127,random(0,2)*127,random(0,2)*127);
-        stroke(random(1,2)*127,0,random(1,2)*127);
-      }
-      else
-      {
-        fill(currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))*255);
-      }
-      text(id, 0, 0);
-      if(glitch)
-      {
-        gl.draw();
-      }        
+      strokeWeight(height/150);
+      fill(random(0,2)*127,random(0,2)*127,random(0,2)*127);
+      stroke(random(1,2)*127,0,random(1,2)*127); //?????????
     }
-   
+    else
+    {
+      fill(region*(1-ceil(((id%5)-0.1)/5))*255,region*(1-ceil(((id%5)-0.1)/5))*255,region*(1-ceil(((id%5)-0.1)/5))*255,titleScreen.av);
+    }
+    if(id>99)
+    {
+      text(id, 0, 0);
+    }
+    else if(id>9)
+    {
+      text("0"+id,0,0);
+    }
+    else
+    {
+      text("00"+id,0,0);
+    }
+    if(glitch)
+    {
+      gl.draw();
+    }           
     popMatrix(); 
-    if(titleScreen.background<255&&titleScreen.gameStarted)
+    
+    if(titleScreen.background<255&&titleScreen.gameStarted) //Transition
     {
         titleScreen.background+=15;
-        fill(currentRoom.region*255,currentRoom.region*255,currentRoom.region*255,(255-titleScreen.background));
+        fill(region*255,region*255,region*255,(255-titleScreen.background));
         noStroke();        
         rect(width/2,height/2,width,height);
     }
-    alpha+=PI/1000;
+    alpha=(alpha+PI/1000)%(2*PI);
   }
 }
