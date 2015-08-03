@@ -1,0 +1,70 @@
+class Menu
+{
+  String[] item;
+  int selected;
+  
+  Menu()
+  {
+    selected=0;
+    item=new String[5];
+    item[0]="Resume";
+    item[1]="Settings";
+    item[2]="Help";
+    item[3]="Credits";
+    item[4]="Quit";
+  }
+  
+  void draw()
+  {
+    background(0);
+    textSize(height/4);
+    fill(255);
+    text("PAUSE", width/2, height/4);
+    selected=(((selected % 5) + 5) % 5);  
+    for(int i=0;i<5;i++)
+    {
+      if(i==selected)
+      {        
+        textSize(height/15);
+        text(">"+item[i]+"<", width/2, height/2 + i*height/12);
+      }
+      else
+      {
+        textSize(height/20);
+        text(item[i], width/2, height/2 + i*height/12);
+      }
+    }
+    
+  }
+  
+  void trigger()
+  {
+    if(!pause)
+      ost.maze.mute();
+    else
+      ost.maze.unmute();
+    pause=!pause;    
+  }
+  
+  void execute()
+  {
+    if(selected==0)
+      trigger();
+    else if(selected==1)
+    {
+      
+    }
+    else if(selected==2)
+    {
+      
+    }
+    else if(selected==3)
+    {
+      
+    }
+    else if(selected==4)
+    {
+      exit();
+    }
+  }
+}
