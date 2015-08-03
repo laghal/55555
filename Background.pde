@@ -1,14 +1,22 @@
 class Background
 {
-  float alpha = 0;
+  float alpha;
   float size;
-  float r=0;
-  float v=0;
-  float b=0;
+  float r;
+  float v;
+  float b;
+  
+  Background()
+  {
+    alpha=0;
+    r=0;
+    v=0;
+    b=0;
+  }
   
   void draw(boolean squared)
   {
-    if(squared&&currentRoom.region==0||currentRoom.id%5!=0)
+    if(squared&&currentRoom.region==0||currentRoom.id%5!=0&&squared)
     {
       noStroke();
       fill(255-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))*255,255-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))*255,255-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))*255,125);
@@ -23,11 +31,10 @@ class Background
       background(0);
     }
     if(squared)
-    {
-      alpha+=PI/1000;
+    {      
       strokeWeight(height/100);
       stroke(currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))*255);
-      
+
       if(currentRoom.region==0)     
         fill(255,255,255,150);
       else if(currentRoom.groundColor==0) //VIOLET
@@ -44,8 +51,8 @@ class Background
       pushMatrix();
       
       translate((width/2)-laghal.x, (height/2)-laghal.y);
+      alpha+=PI/1000;
       
- 
       for(int i=6;i>2;i--)
       {        
         if(currentRoom.ground>12)
@@ -56,7 +63,7 @@ class Background
         {
           rotate(alpha/6);
         }
-        size = (height/3)*sin((2*i)*(PI/12)+alpha)*sin((2*i)*(PI/12)+alpha)+currentRoom.size;        
+        size = ((height/3)*sin((2*i)*(PI/12)+alpha)*sin((2*i)*(PI/12)+alpha)+(height/1.2)-(height/10)+(height/55)*cos(alpha*2))*titleScreen.av/256;        
         rect(0, 0, size, size);
       }
       popMatrix();      
