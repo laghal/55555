@@ -2,7 +2,7 @@ import ddf.minim.*;
 
 void setup()
 {    
-  size(displayWidth,displayHeight+1, OPENGL);
+  size(displayWidth,1+displayHeight, OPENGL);
   noCursor();
   frameRate(55);
 }
@@ -20,15 +20,17 @@ Square laghal;
 Keys keyboard;
 Glitchs gl;
 Music ost;
+Menu menu;
 boolean firstRun = true;
+boolean pause = false;
 
 void draw()
 {
-  if(firstRun){
+  if(firstRun){ 
     textAlign(CENTER, CENTER);
     background(0,0,0);
     textSize(height/4);
-    fill(255,255,255,255);
+    fill(255);
     text("LOADING", width/2, height/2);
     minim = new Minim(this);    
     hint(DISABLE_OPTIMIZED_STROKE);    
@@ -39,29 +41,33 @@ void draw()
     keyboard = new Keys();
     gl = new Glitchs();
     ost = new Music();
-    ost.load();
-    gl.init();
-    keyboard.init();
-    laghal.init();
+    menu = new Menu();
     firstRun = false;
   }
   else if(!titleScreen.gameStarted)
-  {    
+  {
+    mainBG.draw(!currentRoom.glitch);
     titleScreen.draw();    
-    ost.setTitleMusic();    
+    ost.setTitleMusic();
+    laghal.draw();
     titleScreen.keyPressed();
   }
-  else
+  else if(!pause)
   {
     if(currentRoom.glitch)
     {
-      translate(random(-height/25,height/25), random(-height/25,height/25));
+      translate(random(-height/55,height/55), random(-height/55,height/55));
     }
     mainBG.draw(!currentRoom.glitch);
     currentRoom.draw();
     laghal.draw();
     laghal.move();
   }
+  else
+  {
+    menu.draw();
+  }
+
   if(keyPressed&&key=='r')
-    saveFrame("trailer/###############.tif");
+    saveFrame("trailer/######.tif");
 }
