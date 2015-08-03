@@ -4,23 +4,19 @@ class Glitchs
   float[] randomX;
   float[] randomY;
   float[] randomS;
-  int krr = 30;
-  boolean initi = false;
+  int krr;
   
-  void init()
+  Glitchs()
   {
-    if(!initi)
-    {
-      room=new boolean[4];
-      room[0]=true; //BAS GAUCHE
-      room[1]=true; //BAS DROITE
-      room[2]=true; //HAUT GAUCHE
-      room[3]=true; //HAUT DROITE
-      randomX = new float[krr];
-      randomY = new float[krr];
-      randomS = new float[krr];
-      initi = true;
-    }
+    krr = 30;
+    room=new boolean[4];
+    room[0]=true; //BAS GAUCHE
+    room[1]=true; //BAS DROITE
+    room[2]=true; //HAUT GAUCHE
+    room[3]=true; //HAUT DROITE
+    randomX = new float[krr];
+    randomY = new float[krr];
+    randomS = new float[krr];
   }
   
   void update()
