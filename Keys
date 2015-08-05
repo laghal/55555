@@ -34,7 +34,7 @@ void keyPressed()
       menu.selected--;
     else if(keyCode==DOWN)
       menu.selected++;
-    else if(keyCode==ENTER||key==' ')    
+    else if(keyCode==ENTER||key==' '&&menu.show!=3||key==0&&menu.show!=0)    
       menu.execute();
     else if(key==0)
       menu.trigger();
