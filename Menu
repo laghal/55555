@@ -27,7 +27,7 @@ class Menu
     credits[2]="The following year, I made a new version of it:\nSquares - 2014";
     credits[3]="Unsatisfied with my two previous games,\nI began designing 55555 in April 2015";
     credits[4]="Now the game is finished, hurray !\nI really enjoyed making it,\n and I hope you enjoyed playing it too !\nI'm satisfied with this current version\nand hopefully there won't be any new version !";
-    credits[5]="A Game made by Laghal\n\nUsing :\nProcessing 2.2.1\n\nFreely inspired by the film :\n'Cube' by Vincenzo Natali\n\nSpecial Thanks go to :\nMy Family\nAenki\nAppelMoiFulbert\nClaire Chazal\nDeep97\nFoxDelPaso\nFoxfiesta\nImanor\nJean-Baptiste P.\nJemmerdeLeKarma\nJulien Lepers\nKitu\nKuminette\nLaura J.\nMonsieur Pétrole\nNapoRen44\nNyddhog\nOujevipo\nPatouroulove\nPauline V.\nPerturbateur B\nPouryfox\nPyrofoux\nRand0matic\nRyan Gosling\nSskdsksd\nSylvia R.\nTfkmaster\nVictor V.\nWHY\nXnqiq\nXurioph\n\n\n\nAnd to all of you for playing 55555";
+    credits[5]="A Game made by Laghal\n\nUsing :\nProcessing 2.2.1\n\nFreely inspired by the film :\n'Cube' by Vincenzo Natali\n\nSpecial Thanks go to :\nMy Family\nAenki\nAppelMoiFulbert\nClaire Chazal\nDeep97\nFoxDelPaso\nFoxfiesta\nImanor\nJean-Baptiste P.\nJemmerdeLeKarma\nJulien Lepers\nKitu\nKuminette\nLaura J.\nMonsieur Pétrole\nNapoRen44\nNyddhog\nOujevipo\nPatouroulove\nPauline V.\nPerturbateur B\nPlanet Sushi\nPouryfox\nPyrofoux\nRand0matic\nRyan Gosling\nSskdsksd\nSylvia R.\nTfkmaster\nVictor V.\nWHY\nXnqiq\nXurioph\n\n\nAnd to all of you for playing 55555";
   }
   
   void draw()
