@@ -3,15 +3,20 @@ class Music
   AudioPlayer title;
   AudioPlayer start;
   AudioPlayer maze;
-  boolean titleSet = false;
-  boolean startSet = false;
-  boolean mazeSet = false;
+  AudioPlayer credits;
+  boolean titleSet;
+  boolean startSet;
+  boolean mazeSet;  
   
   Music()
   {
+    titleSet = false;
+    startSet = false;
+    mazeSet = false;
     title = minim.loadFile("ost/Title.mp3", 2048);
     start = minim.loadFile("ost/Start.mp3", 2048);
     maze = minim.loadFile("ost/Maze.mp3", 2048);
+    credits = minim.loadFile("ost/Credits.mp3", 2048);
   }
   
   void setTitleMusic()
