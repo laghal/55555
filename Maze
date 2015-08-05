@@ -8,8 +8,8 @@ void getlost(int i)
     currentRoom.region=0;
     currentRoom.glitch=false;
     currentRoom.id=int(random(557,1553));
-  }
-   
+  }  
+
   if(titleScreen.gameStarted&&currentRoom.region==0) //WHITEZONE
   {
     if(i<2)
@@ -73,7 +73,22 @@ void getlost(int i)
         if(i==0) //GLITCH HAUT GAUCHE
         {
           if(gl.room[2])
+          {
             currentRoom.glitch=true;
+            if(currentRoom.ground==1)
+              currentRoom.id+=3;
+            else if(currentRoom.ground==11)
+              currentRoom.id+=55;
+            else if(currentRoom.ground==111)
+              currentRoom.id+=777;
+            if(currentRoom.id==555)
+            {
+              gl.unglitch=1;
+              gl.room[2]=false;
+            }
+          }
+          else
+            currentRoom.region=0;
         }
         else if(i==1)
         {
@@ -185,7 +200,22 @@ void getlost(int i)
         else //GLITCH BAS GAUCHE
         {
           if(gl.room[0])
+          {
             currentRoom.glitch=true;
+            if(currentRoom.ground==1)
+              currentRoom.id+=4;
+            else if(currentRoom.ground==11)
+              currentRoom.id+=66;
+            else if(currentRoom.ground==111)
+              currentRoom.id+=888;
+            if(currentRoom.id==555)
+            {
+              gl.unglitch=1;
+              gl.room[0]=false;
+            }
+          }
+          else
+            currentRoom.region=0;
         }
       }
     }
@@ -197,6 +227,8 @@ void getlost(int i)
         {
           if(i==0&&gl.room[0]||i==1&&gl.room[1])
             currentRoom.glitch=true;
+          else
+            currentRoom.region=0;
         }
         else if(currentRoom.id%5<4)
         {
@@ -272,7 +304,22 @@ void getlost(int i)
         else //GLITCH BAS DROITE
         {
           if(gl.room[1])
+          {
             currentRoom.glitch=true;
+            if(currentRoom.ground==1)
+              currentRoom.id+=8;
+            else if(currentRoom.ground==11)
+              currentRoom.id+=66;
+            else if(currentRoom.ground==111)
+              currentRoom.id+=444;
+            if(currentRoom.id==555)
+            {
+              gl.unglitch=1;
+              gl.room[1]=false;
+            }
+          }
+          else
+            currentRoom.region=0;
         }
       }
     }
@@ -296,7 +343,22 @@ void getlost(int i)
         if(i==1) //GLITCH HAUT DROITE
         {
           if(gl.room[3])
-          currentRoom.glitch=true;
+          {
+            currentRoom.glitch=true;
+            if(currentRoom.ground==1)
+              currentRoom.id+=7;
+            else if(currentRoom.ground==11)
+              currentRoom.id+=55;
+            else if(currentRoom.ground==111)
+              currentRoom.id+=333;
+            if(currentRoom.id==555)
+            {
+              gl.unglitch=1;
+              gl.room[3]=false;
+            }
+          }
+          else
+            currentRoom.region=0;          
         }
         else if(i==0)
         {
@@ -357,5 +419,8 @@ void getlost(int i)
   {
     
   }
-  currentRoom.id=(((currentRoom.id % 1000) + 1000) % 1000);
+  if(gl.NGRoom!=0)
+    currentRoom.id=(((currentRoom.id % 1000) + 1000) % 1000);
+  else
+    currentRoom.id=(((currentRoom.id % 100000) + 100000) % 100000);
 }
