@@ -1,39 +1,29 @@
 class Glitchs
 {
   boolean[] room;
-  float[] randomX;
-  float[] randomY;
-  float[] randomS;
   int krr;
+  float unglitch;
+  int NGRoom;
   
   Glitchs()
   {
+    unglitch=0;
     krr = 30;
+    NGRoom=4;
     room=new boolean[4];
     room[0]=true; //BAS GAUCHE
     room[1]=true; //BAS DROITE
     room[2]=true; //HAUT GAUCHE
     room[3]=true; //HAUT DROITE
-    randomX = new float[krr];
-    randomY = new float[krr];
-    randomS = new float[krr];
   }
   
   void update()
-  {    
-    for(int j=0;j<krr;j++)
-    {
-      randomX[j] = random(-width,width);
-      randomY[j] = random(-height,height);
-      randomS[j] = random(height/10,height/4);
-    }
-  }
-  
-  void draw()
   {
-    if(random(0,75)<3)
-      update();
-    for(int i=0;i<krr;i++)                
-      rect(randomX[i],randomY[i],randomS[i],randomS[i]); 
+    NGRoom=0;
+    for(int i=0;i<4;i++)
+    {
+      if(room[i])
+        NGRoom++;
+    }
   }
 }
