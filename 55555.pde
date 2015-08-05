@@ -1,10 +1,19 @@
 import ddf.minim.*;
+PImage dedi;
+PImage thesquare;
+PImage squares;
+PImage five;
 
 void setup()
 {    
-  size(displayWidth,1+displayHeight, OPENGL);
+  size(displayWidth,1+displayHeight, OPENGL);  
   noCursor();
   frameRate(55);
+  dedi = loadImage("dedi.jpg");
+  thesquare = loadImage("TheSquare.jpg");
+  squares = loadImage("Squares.jpg");
+  five = loadImage("55555.jpg");
+  frame.setTitle("55555"); 
 }
 
 boolean sketchFullScreen()
@@ -24,14 +33,14 @@ Menu menu;
 boolean firstRun = true;
 boolean pause = false;
 
+
 void draw()
 {
+  
   if(firstRun){ 
-    textAlign(CENTER, CENTER);
+    imageMode(CENTER);
     background(0,0,0);
-    textSize(height/4);
     fill(255);
-    text("LOADING", width/2, height/2);
     minim = new Minim(this);    
     hint(DISABLE_OPTIMIZED_STROKE);    
     titleScreen = new Title();
@@ -46,7 +55,8 @@ void draw()
   }
   else if(!titleScreen.gameStarted)
   {
-    mainBG.draw(!currentRoom.glitch);
+    textAlign(CENTER, CENTER);
+    mainBG.draw();
     titleScreen.draw();    
     ost.setTitleMusic();
     laghal.draw();
@@ -54,17 +64,41 @@ void draw()
   }
   else if(!pause)
   {
+    textAlign(CENTER, CENTER);
+    
     if(currentRoom.glitch)
     {
       translate(random(-height/55,height/55), random(-height/55,height/55));
     }
-    mainBG.draw(!currentRoom.glitch);
+    mainBG.draw();
     currentRoom.draw();
     laghal.draw();
-    laghal.move();
+    
+    fill(0);
+    text(gl.NGRoom, -width/2.5, -height/2.5);
+    if(gl.unglitch>0&&currentRoom.glitch)
+    {
+      laghal.x-=laghal.x/25;
+      laghal.y-=laghal.y/25;
+      gl.unglitch++;
+      if(gl.unglitch>255)
+      {
+        currentRoom.glitch=false;
+        gl.update();
+      }
+    }
+    else if(gl.unglitch>0)
+    {
+       gl.unglitch--;
+    }
+    else
+    {
+      laghal.move();
+    }
   }
   else
   {
+    textAlign(CENTER, TOP);
     menu.draw();
   }
 
