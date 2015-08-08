@@ -16,7 +16,8 @@ void keyPressed()
 {
   if(key==27)
     key=0;
-  if(!pause){
+  if(!pause&&!gameFinished)
+  {
     if(keyCode==UP)
       keyboard.keys[0]=true;
     if(keyCode==DOWN)
@@ -28,13 +29,13 @@ void keyPressed()
     if(keyCode==ENTER&&titleScreen.gameStarted||key==' '&&titleScreen.gameStarted||key==0&&titleScreen.gameStarted)
       menu.trigger();
   }
-  else
+  else if(!gameFinished)
   {
     if(keyCode==UP)
       menu.selected--;
     else if(keyCode==DOWN)
       menu.selected++;
-    else if(keyCode==ENTER||key==' '&&menu.show!=3||key==0&&menu.show!=0)    
+    else if(keyCode==ENTER&&menu.show!=3||key==' '&&menu.show!=3||key==0&&menu.show!=0)    
       menu.execute();
     else if(key==0)
       menu.trigger();
