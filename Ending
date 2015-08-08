@@ -1,0 +1,100 @@
+class End
+{
+  float ending;
+  float x;
+  float y;
+  float alpha;
+  boolean clignement;
+  String[] lastMessage;
+  int dial;
+  int frm;
+  
+  End()
+  {
+    clignement=false;
+    x=0;
+    y=0;
+    alpha=0;
+    ending=0;
+    dial=0;
+    frm=0;
+    lastMessage=new String[17];
+    lastMessage[0] = "...";
+    lastMessage[1] = "It seems like I finally repaired the Squares project...";
+    lastMessage[2] = "...";
+    lastMessage[3] = "The first pulse, our boss, went haywire in the previous maze...";
+    lastMessage[4] = "...";
+    lastMessage[5] = "I tried to kill him, but he found a way out...";
+    lastMessage[6] = "A stack overflow...";
+    lastMessage[7] = "...";
+    lastMessage[8] = "After his escape, the glitches began to materialize.";
+    lastMessage[9] = "Obviously we couldn't stop the project safely...";
+    lastMessage[10] = "It could have affected my neural network...";
+    lastMessage[11] = "...Me do evil.";
+    lastMessage[12] = "I created Two sisteRs to protect our main server...";
+    lastMessage[13] = "They will soon be deleted. I'm sad about it.";
+    lastMessage[14] = "Now everything is over...";
+    lastMessage[15] = "The situation is under control.";
+    lastMessage[16] = "Farewell, [USER]";
+  }
+  
+  void draw()
+  {
+    textSize(height/25);
+    background(0);
+    stroke(ending);
+    if(frameCount%75<4||frameCount%75<9&&frameCount%75>5)
+      clignement=true;
+    else
+      clignement=false;
+    
+    pushMatrix();
+    translate(width/2, height/2);
+    if(random(0,55)<2)
+      translate(random(-height/4,height/4), random(-height/4,height/4));
+    strokeWeight(height/50);
+    fill(ending);
+    if(ending>240||dial==16)
+    {
+      text(lastMessage[dial],0,(ending/255)*2*height/5);
+      frm++;
+      if(frm%275==0&&dial<16)
+      {
+        frm=0;
+        dial++;
+      }
+    }
+    translate(x,y);
+    if(!clignement)
+    {
+      line(0,0,0,-(ending/255)*2*height/5); 
+      rotate((ending/300)*PI/5);
+      line(0,0,0,-(ending/255)*height/3);
+      line(0,0,0,(ending/255)*height/4);
+      rotate(-(ending/300)*2*PI/5);
+      line(0,0,0,-(ending/255)*height/3);
+      line(0,0,0,(ending/255)*height/4);
+    }
+    
+    fill(55,55,55,ending);
+    ellipse(0,0,(height/25)+(ending*height/(3*255)),(height/25)+(ending*height/(3*255)));
+    if(!clignement)
+    {
+      strokeWeight(height/125);
+      fill(0,0,0,ending);
+      ellipse(0,0,(ending*height/(3*255))-(height/50),(ending*height/(3*255))-(height/50));
+    }
+    else    
+      line((-(height/25)-(ending*height/(3*255)))/2,0,((height/25)+(ending*height/(3*255)))/2,0);
+    popMatrix();
+    if(ending<255&&dial<16)
+      ending+=0.5;
+    else if(dial==16&&ending>0)
+      ending--; 
+    else if(dial==16&&frm>555)
+      exit();
+    x=(ending/255)*cos(alpha)*height/75;
+    y=(ending/255)*sin(alpha)*height/75;
+    alpha=(alpha+PI/100)%(2*PI);    
+  }
+}
