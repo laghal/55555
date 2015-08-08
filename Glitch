@@ -9,12 +9,12 @@ class Glitchs
   {
     unglitch=0;
     krr = 30;
-    NGRoom=4;
+    NGRoom=0;
     room=new boolean[4];
-    room[0]=true; //BAS GAUCHE
-    room[1]=true; //BAS DROITE
-    room[2]=true; //HAUT GAUCHE
-    room[3]=true; //HAUT DROITE
+    room[0]=false; //BAS GAUCHE//TRUEPARDEFAUT
+    room[1]=false; //BAS DROITE
+    room[2]=false;//HAUT GAUCHE
+    room[3]=false;//HAUT DROITE
   }
   
   void update()
