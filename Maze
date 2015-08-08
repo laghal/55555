@@ -9,14 +9,13 @@ void getlost(int i)
     currentRoom.glitch=false;
     currentRoom.id=int(random(557,1553));
   }  
-
   if(titleScreen.gameStarted&&currentRoom.region==0) //WHITEZONE
   {
-    if(i<2)
+    if(i<2&&gl.NGRoom!=0)
     {
       currentRoom.id+=(i*2-1)*currentRoom.ground;
     }
-    else
+    else if(i>1)
     {
       if(currentRoom.ground==1)
       {
@@ -31,9 +30,24 @@ void getlost(int i)
         currentRoom.ground-=+(i-2)*110+(-i+3)*100;
       }
     }
-    if(currentRoom.id==555)
+    if(currentRoom.id==555&&gl.NGRoom!=0)
     {
       currentRoom.region=1;
+    }
+    if(gl.NGRoom==0&&i<2)
+    {
+      if(currentRoom.ground==1)
+      {
+        currentRoom.id+=(i*2-1)*10001;
+      }
+      else if(currentRoom.ground==11)
+      {
+        currentRoom.id+=(i*2-1)*10;
+      }
+      else
+      {
+        currentRoom.id+=(i*2-1)*1000;
+      }
     }
   }
   else if(currentRoom.region==1) //COLOURED ZONE
@@ -415,12 +429,16 @@ void getlost(int i)
       }
     }
   }
-  else if(titleScreen.gameStarted)//ENDING ?
-  {
-    
-  }
   if(gl.NGRoom!=0)
     currentRoom.id=(((currentRoom.id % 1000) + 1000) % 1000);
   else
+  {
+    ost.closeMazeMusic();
     currentRoom.id=(((currentRoom.id % 100000) + 100000) % 100000);
+  }
+  if(currentRoom.id==55555)
+  {
+    gameFinished=true;
+    ost.setEndingMusic();
+  }
 }
