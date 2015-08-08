@@ -21,15 +21,22 @@ class Room
     
   void draw()
   {
-    size = (height/1.2)-(height/10)+(height/55)*cos(alpha*2);  
+    size = (height/1.2)-(height/10)+(height/55)*cos(alpha*2);
+    if(gameFinished)
+      size = (1-(gl.unglitch/256))*((height/1.2)-(height/10)+(height/55)*cos(alpha*2));
     doorSize = (titleScreen.av/256)*size/7;
     rectMode(CENTER);
     strokeWeight(height/50);
     
     if(glitch)
     {
-      fill((1-(gl.unglitch/256))*random(0,2)*55,(1-(gl.unglitch/256)),(1-(gl.unglitch/256))*random(0,2)*55);
+      fill((1-(gl.unglitch/256))*random(0,2)*55,(1-(gl.unglitch/256)),(1-(gl.unglitch/256))*random(0,2)*55,(1-(gl.unglitch/256))*255);
       stroke(255*(gl.unglitch/256)+(1-(gl.unglitch/256))*random(0,2)*105,255*(gl.unglitch/256),255*(gl.unglitch/256)+(1-(gl.unglitch/256))*random(0,2)*105);
+    }
+    if(gameFinished)
+    {
+      fill(255,255,255,(1-(gl.unglitch/256))*255);
+      stroke(0,0,0,(1-(gl.unglitch/256))*255);
     }
     else
     {
@@ -66,14 +73,33 @@ class Room
       fill(255*(gl.unglitch/256)+(1-(gl.unglitch/256))*random(0,2)*127,255*(gl.unglitch/256)+(1-(gl.unglitch/256))*random(0,2)*127,255*(gl.unglitch/256)+(1-(gl.unglitch/256))*random(0,2)*127);
       //stroke(255*(gl.unglitch/256)+(1-(gl.unglitch/256))*random(1,2)*127,255*(gl.unglitch/256),255*(gl.unglitch/256)+(1-(gl.unglitch/256))*random(1,2)*127);
     }
-    else
+    else if(!gameFinished)
       fill(region*(1-ceil(((id%5)-0.1)/5))*255,region*(1-ceil(((id%5)-0.1)/5))*255,region*(1-ceil(((id%5)-0.1)/5))*255,titleScreen.av);
-    if(id>99)
-      text(id, 0, 0);
-    else if(id>9)
-      text("0"+id,0,0);
     else
-      text("00"+id,0,0);      
+      fill(0,0,0,(1-(gl.unglitch/256))*255);
+      
+    if(gl.NGRoom!=0)
+    {  
+      if(id>99)
+        text(id, 0, 0);
+      else if(id>9)
+        text("0"+id,0,0);
+      else
+        text("00"+id,0,0);
+    }
+    else
+    {
+      if(id>9999)
+        text(id, 0, 0);
+      else if(id>999)
+        text("0"+id,0,0);
+      else if(id>99)
+        text("00"+id,0,0);
+      else if(id>9)
+        text("000"+id,0,0);
+      else
+        text("0000"+id,0,0);
+    }
     popMatrix(); 
     
     if(titleScreen.background<255&&titleScreen.gameStarted) //Transition
