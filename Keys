@@ -35,6 +35,10 @@ void keyPressed()
       menu.selected--;
     else if(keyCode==DOWN)
       menu.selected++;
+    else if(menu.show==1&&key!=0&&menu.selected<4) //Settings enable/disabled
+      menu.stg[menu.selected]=!menu.stg[menu.selected];
+    else if(menu.show==1&&keyCode==ENTER&&menu.selected==4||menu.show==1&&key==' '&&menu.selected==4) //Settings RESET
+      menu.resetGame();
     else if(keyCode==ENTER&&menu.show!=3||key==' '&&menu.show!=3||key==0&&menu.show!=0)    
       menu.execute();
     else if(key==0)
