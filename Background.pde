@@ -2,16 +2,10 @@ class Background
 {
   float alpha;
   float size;
-  float r;
-  float v;
-  float b;
   
   Background()
   {
     alpha=0;
-    r=0;
-    v=0;
-    b=0;
   }
   
   void draw()
@@ -19,7 +13,10 @@ class Background
     if(currentRoom.region==0&&!currentRoom.glitch||currentRoom.id%5!=0&&!currentRoom.glitch)
     {
       noStroke();
-      fill(255-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))*255,255-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))*255,255-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))*255,125);
+      if(menu.stg[0])
+        fill(255-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))*255,255-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))*255,255-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))*255,155);
+      else
+        fill(255-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))*255);
       rect(displayWidth/2, (displayHeight+1)/2, displayWidth, displayHeight+1);      
     }
     else
@@ -29,10 +26,10 @@ class Background
       
     strokeWeight(height/100);
     stroke(currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))*255);
-    if(currentRoom.region==0)  
-    {   
+    if(gl.NGRoom==0)
+      noFill();
+    else if(currentRoom.region==0)    
       fill(255,255,255,150);
-    }
     else if(currentRoom.groundColor==0) //VIOLET
       fill(255,5,205,150);
     else if(currentRoom.groundColor==1) //ROUGE
@@ -47,7 +44,7 @@ class Background
     pushMatrix();
     
     translate((width/2)-laghal.x, (height/2)-laghal.y);
-    alpha+=PI/1000;
+    alpha=(alpha+PI/1000)%(2*PI);
     
     for(int i=6;i>2;i--)
     {   
