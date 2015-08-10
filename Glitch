@@ -1,20 +1,20 @@
 class Glitchs
 {
   boolean[] room;
-  int krr;
+  //int krr; SI PAS UTILER VIRER
   float unglitch;
   int NGRoom;
   
   Glitchs()
   {
     unglitch=0;
-    krr = 30;
-    NGRoom=0;
+    //krr = 30; SI PAS UTILE VIRER
+    NGRoom=1;
     room=new boolean[4];
     room[0]=false; //BAS GAUCHE//TRUEPARDEFAUT
     room[1]=false; //BAS DROITE
     room[2]=false;//HAUT GAUCHE
-    room[3]=false;//HAUT DROITE
+    room[3]=true;//HAUT DROITE
   }
   
   void update()
