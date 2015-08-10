@@ -1,10 +1,19 @@
 class Title
 {
-  boolean press = false;
-  boolean gameStarted = false;
-  Room titleRoom = new Room();
-  float background = 155;
-  float av=0;
+  boolean press;
+  boolean gameStarted;
+  Room titleRoom;
+  float background;
+  float av;
+  
+  Title()
+  {
+    press = false;
+    gameStarted = false;
+    titleRoom = new Room();
+    background = 155;
+    av=0;
+  }
   
   void draw()
   {  
