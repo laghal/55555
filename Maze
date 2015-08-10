@@ -429,12 +429,16 @@ void getlost(int i)
       }
     }
   }
+  if(currentRoom.glitch&&currentRoom.id==555&&gl.NGRoom==1)
+    ost.closeMazeMusic();
   if(gl.NGRoom!=0)
     currentRoom.id=(((currentRoom.id % 1000) + 1000) % 1000);
   else
-  {
-    ost.closeMazeMusic();
     currentRoom.id=(((currentRoom.id % 100000) + 100000) % 100000);
+  if(gl.NGRoom==0&&currentRoom.region!=0)
+  {
+    currentRoom.region=0;
+    currentRoom.id=int(random(0,25525));
   }
   if(currentRoom.id==55555)
   {
