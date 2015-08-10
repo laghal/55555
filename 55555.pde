@@ -6,7 +6,7 @@ PImage five;
 
 void setup()
 {    
-  size(displayWidth,1+displayHeight, OPENGL);  
+  size(displayWidth/2,1+displayHeight/2, OPENGL);  
   noCursor();
   frameRate(55);
   dedi = loadImage("Dedi.jpg");
@@ -18,7 +18,7 @@ void setup()
 
 boolean sketchFullScreen()
 {
-  return true;
+  return false;
 }
 
 Minim minim;
@@ -37,10 +37,14 @@ boolean gameFinished = false;
 
 void draw()
 { 
-  if(firstRun){ 
+  if(firstRun) //INIT
+  { 
     imageMode(CENTER);
     background(0,0,0);
     fill(255);
+    textSize(height/4);
+    textAlign(CENTER, CENTER);
+    text(5,width/2,height/2);
     minim = new Minim(this);    
     hint(DISABLE_OPTIMIZED_STROKE);    
     titleScreen = new Title();
@@ -54,7 +58,7 @@ void draw()
     eye = new End();
     firstRun = false;
   }
-  else if(!titleScreen.gameStarted)
+  else if(!titleScreen.gameStarted) //TITLE
   {
     textAlign(CENTER, CENTER);
     mainBG.draw();
@@ -63,14 +67,14 @@ void draw()
     laghal.draw();
     titleScreen.keyPressed();
   }
-  else if(gameFinished&&gl.unglitch>255)
+  else if(gameFinished&&gl.unglitch>255) //ENDING
   {
     textAlign(CENTER, CENTER);
     eye.draw();
     if(!eye.clignement)
       laghal.draw();
   }
-  else if(!pause)
+  else if(!pause) //MAIN
   {
     textAlign(CENTER, CENTER);
     
@@ -93,6 +97,7 @@ void draw()
       {
         currentRoom.glitch=false;
         gl.update();
+        currentRoom.id=0;
       }      
     }
     else if(gl.unglitch>0&&!gameFinished)
@@ -104,9 +109,15 @@ void draw()
       laghal.move();
     }    
   }  
-  else
+  else //PAUSE
   {
     textAlign(CENTER, TOP);
     menu.draw();
   }
+}
+
+void exit()
+{  
+  minim.stop();
+  super.exit();
 }
