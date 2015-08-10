@@ -20,7 +20,7 @@ class Square
     y=0;
     vx=0;
     vy=0;
-    max = height/18.75;
+    max = currentRoom.size/8;
     old_x=new float[15];
     old_y=new float[15];
     old_s=new float[15];   
@@ -43,7 +43,7 @@ class Square
        old_y[i]=old_y[i+1];
        old_s[i]=old_s[i+1];
     }    
-    max = height/18.75;
+    max = currentRoom.size/8;
     if(gameFinished&&gl.unglitch>255)
       translate(eye.x+width/2, eye.y+height/2);
     else
@@ -54,19 +54,22 @@ class Square
     {
       size-=height/75;
     }
-    for(int i=0;i<14;i+=1)
+    if(menu.stg[1])
     {
-      if(!currentRoom.glitch)
+      for(int i=0;i<14;i+=1)
       {
-        fill((1-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5)))*(16-i)*15+(i+1)*15*(currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))),(1-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5)))*(16-i)*15+(i+1)*15*(currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))),(1-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5)))*(16-i)*15+(i+1)*15*(currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))),titleScreen.av);
-        stroke((1-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5)))*(16-i)*15+(i+1)*15*(currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))),(1-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5)))*(16-i)*15+(i+1)*15*(currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))),(1-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5)))*(16-i)*15+(i+1)*15*(currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))),titleScreen.av);
-        rect(old_x[i]-x,old_y[i]-y,old_s[i]*(i+1)/15,old_s[i]*(i+1)/15);
-      }
-      else
-      {
-        fill(random(0,2)*127,random(0,2)*127,random(0,2)*127);
-        stroke(random(1,2)*127,0,random(1,2)*127);
-        rect(old_x[i]-x+random(-5,5),old_y[i]-y+random(-5,5),old_s[i]*(i+1)/15,old_s[i]*(i+1)/15);
+        if(!currentRoom.glitch)
+        {
+          fill((1-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5)))*(16-i)*15+(i+1)*15*(currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))),(1-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5)))*(16-i)*15+(i+1)*15*(currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))),(1-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5)))*(16-i)*15+(i+1)*15*(currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))),titleScreen.av);
+          stroke((1-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5)))*(16-i)*15+(i+1)*15*(currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))),(1-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5)))*(16-i)*15+(i+1)*15*(currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))),(1-currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5)))*(16-i)*15+(i+1)*15*(currentRoom.region*(1-ceil(((currentRoom.id%5)-0.1)/5))),titleScreen.av);
+          rect(old_x[i]-x,old_y[i]-y,old_s[i]*(i+1)/15,old_s[i]*(i+1)/15);
+        }
+        else
+        {
+          fill(random(0,2)*127,random(0,2)*127,random(0,2)*127);
+          stroke(random(1,2)*127,0,random(1,2)*127);
+          rect(old_x[i]-x+random(-5,5),old_y[i]-y+random(-5,5),old_s[i]*(i+1)/15,old_s[i]*(i+1)/15);
+        }
       }
     }
     if(!currentRoom.glitch)
@@ -184,7 +187,7 @@ class Square
       vy+=3;
       y=-y;
     }
-    if(x>(currentRoom.size/2)-(size/2)&&vx*vx<0.5)
+    /*if(x>(currentRoom.size/2)-(size/2)&&vx*vx<0.5)
     {
       max=55555;
       vx+=55555;
@@ -205,6 +208,6 @@ class Square
       vy+=55555;
     }
     if(max>(width/18.75)+1&&vx*vx+vy*vy<width*0.04*width*0.04)
-      max=height/18.75;
+      max=height/18.75;*/
   }
 }
